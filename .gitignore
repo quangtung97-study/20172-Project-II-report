@@ -1,0 +1,7 @@
+# for latex
+*.aux
+*.log  
+*.out  
+*.toc
+
+*.swp
