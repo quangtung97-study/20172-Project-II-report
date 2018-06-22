@@ -43,10 +43,49 @@ Tác tử thông minh có thể học và sử dụng kiến thức để đạt
 \caption{Simple reflex agent}
 \end{figure}
 
+Tác tử thông minh có thể có các đặc trưng sau: 
+\begin{itemize}
+    \item Có thể bổ sung các quy tắc (rule) giải quyết bài toán. 
+    \item Thích ứng với môi trường một cách trực tuyến và thời gian thực. 
+    \item Có khả năng phân tích được hành động của bản thân, sự thành công và thất bại. 
+    \item Học và cải thiện thông qua tương tác với môi trường. 
+    \item Học nhanh chóng từ một lượng dữ liệu lớn. 
+    \item Có bộ nhớ để lưu trữ và truy cập. 
+    \item Có các tham số để đại diện bộ nhớ ngắn hạn và dài hạn, tuổi tác, mức độ quên, \ldots 
+\end{itemize}
 
 
-\subsection{Hệ đa tác tử}
-Hệ đa tác tử (multi-agent system) là một hệ tính toán được tạo thành bởi nhiều tác tử. \cite{multi-agent-system-wiki}
+\subsection{Hệ đa tác tử - Multi-agent System}
+Hệ đa tác tử (multi-agent system) là một hệ tính toán được tạo thành bởi nhiều tác tử thông minh \cite{multi-agent-system-wiki}.
+Hệ đa tác tử có thể được sử dụng để giải các bàn toán khó hoặc không thể giải bằng các phương pháp đơn tác tử hoặc một hệ đơn khối nào. 
+Hệ đa tác tử được cấu thành bởi các tác tử và môi trường của nó. 
+
+Các tác tử trong hệ đa tác tử có thể chia thành:
+\begin{itemize}
+    \item Tác tử thụ động hay ``tác tử không có mục đích'' (Ví dụ: vật cản).
+    \item Tác tử chủ động với mục đích đơn giản (Ví dụ: xe cộ). 
+    \item Tác tử nhận thức với tính toán phức tạp. 
+\end{itemize}
+
+Môi trường của các tác tử có thể chia thành:
+\begin{itemize}
+    \item Ảo.
+    \item Rời rạc.
+    \item Liên tục. 
+\end{itemize}
+
+Môi trường cũng có thể được tổ chức dựa theo các thuộc tính như ``khả năng tiếp cận'', ``tính xác định'', ``tính động'', ``tính rời rạc'',
+``tính giai đoạn'', ``số chiều''. 
+
+Đặc trưng của hệ đa tác tử: 
+\begin{itemize}
+    \item Tự trị: Độc lập ít nhất một phần, tự nhận thức, tự động.
+    \item Tầm nhìn giới hạn: Không có tác tử nào có một tầm nhìn cho toàn bộ môi trường, hoặc hệ thống quá phức tạp để
+        một tác tử có thể khai thác được lượng kiến thức đó. 
+    \item Phân cấp: Không tác tử nào được chỉ định là tác tử chỉ huy. 
+\end{itemize}
+
+Hệ đa tác tử đa phần được thực hiện bằng chương trình giả lập. Hệ thống thực hiện lần lượt từng ``bước thời gian''. 
 
 
 \end{document}

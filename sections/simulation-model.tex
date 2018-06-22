@@ -1,0 +1,34 @@
+\documentclass[../report.tex]{subfiles}
+
+\begin{document}
+Một mô hình mô phỏng (simulation model) bao gồm một tập các quy tắc định nghĩa cách thức 
+mà hệ thống thay đổi theo thời gian, với một trạng thái hiện tại bất kì.
+\cite{multi-agent-simulation}
+Không nhơ mô hình phân tích, mô hinh mô phỏng không được giải (bằng tính toán hay chứng minh) mà dựa vào 
+việc chạy và thay đổi trạng thái của hệ thống và quan sát giá trị tại trạng thái bất kì thời điểm nào. Nó cung cấp 
+một cái nhìn vào bên trong hệ thống thay vì chị dựa vào một kết quả cụ thể nào. 
+Giả lập không phải công cụ quyết định mà là công cụ hỗ trợ quyết định, cho phép tạo ra những lựa chọn tốt hơn. 
+
+Do sự phức tạp của các bài toán thực tế nên một mô hình mô phỏng chỉ có thể là một mô hình xấp xỉ của hệ thống đích. 
+Do đó việc trừu tượng hóa và đơn giản hóa là công việc thiết yếu trong thiết kế một mô hình mô phỏng. Chỉ những đặc trưng 
+quan trọng để nghiên cứu và phân tích của hệ thống đích mới nên được đưa vào trong mô hình. 
+
+Có ba loại kĩ thuật mô phỏng thường được sử dụng: 
+\begin{itemize}
+\item Mô phỏng sự kiện rời rạc - Bao gồm một tập các thực thể được xử lý và tiến triển theo thời gian dựa vào 
+sự xuất hiện hay biến mất của các tài nguyên hoặc sự xuất hiện của các sự kiện. Được xây dựng dựa trên 
+một hàng đợi các sự kiện. 
+\item Mô phỏng hệ thống động - Mô phỏng hệ thống theo thời gian, dựa vào mối quan hệ giữa các thực thể hoặc dựa 
+vào một phương trình vi phân nào đó. 
+\item Mô phỏng tác tử - Mô phỏng hệ thức ở mức thức. Những cấu trúc ở mức cao được tạo thành bởi các hành động của các 
+tác tử và tương tác giữa chúng. 
+\end{itemize}
+
+Mặc dù mô phỏng máy tính đã được sử dụng rộng rãi từ những năm 1960 nhưng mô phỏng tác tử chỉ trở nên phổ biến từ những
+năm 1990. Nó hiện tại là một công cụ mô hình mô phỏng được xây dựng mạnh mẽ và bắt đầu phổ biến trong giảng dạy và trong 
+công nghiệp. Mô phỏng tác tử được sử dụng trong trường hợp mà sự tương tác giữa các tác tử không thể bị xem nhẹ. Nó 
+cho phép nghiên cứu về tính động của hệ thống thông qua những đặc điểm của từng cá thể trong môi trường. 
+Mô phỏng tác tử là một mô hình hứa hẹn vì nó dựa vào ý tưởng rằng mọi việc của con người được thực hiện nhờ sự thông minh, 
+giao tiếp và hợp tác. 
+\end{document}
+
