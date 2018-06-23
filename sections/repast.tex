@@ -1,9 +1,131 @@
 \documentclass[../report.tex]{subfiles}
 
 \begin{document}
+\newcommand{\HRule}{\rule{\linewidth}{1pt}} % Defines a new command for the horizontal lines, change thickness here
+
 Repast Simphony (version hiện tại 2.5) là một hệ đa nền tảng, tích hợp, tương tác chạy bằng Java. Nó hỗ trợ 
 phát triển những mô hình mềm dẻo đa tác tử cho các máy máy chủ và các cụm máy tính. \cite{repast-simphony}
+Kiến trúc của Repast Simphony dựa trên nguyên nhiều các hệ thống mô phỏng tác tử xây dựng trước đó. 
+Nguyên lý thiết kế của Repast S: \cite{repast-reference}
+\begin{itemize}
+    \item Có sự tách biệt rõ ràng giữa mô hình, lưu trữ dữ liệu và hiển thị. 
+    \item Phần lớn các chức năng có thể được thực hiện mà không phải implement một interface, mở rộng 
+        một lớp hay sử dụng proxy. 
+    \item Các chức năng cơ bản nên được tự động khi có thể.
+    \item Những đoạn code lặp lại, rườm rà nhưng bắt buộc nên bị loại bỏ hoặc thay thế bởi những thiết lập ở runtime khi có thể. 
+    \item Những code cơ bản (như duyệt qua danh sách các tác tử) nên đơn giản và trực tiếp. 
+\end{itemize}
+
+Trong project này tôi sử dụng Java để xây dựng các mô hình đa tác tử. 
 
 \subsection{Context}
+Context là đối tượng cơ bản trong Repast S. Nó cung cấp cấu trúc dữ liệu để tổ chức các tác tử 
+ở cả phương diện mô hình hóa và phương diện lập trình. 
+Một cách cơ bản thì Context là một đối tượng chứa các tác tử và các chức năng liên quan. Nó là một loại 
+container dựa trên cấu trúc tập hợp. Bất kì một kiểu Object nào cũng có thể được lưu vào Context. 
+Ở phương diện mô hình hóa, Context đại diện cho một quần thể. 
+
+Context có thể tổ chức dướng dạng phân cấp với Context cha và các Context con. Context còn có thể chứa các 
+Projection. Tác tử có thể được thêm hoặc xóa khỏi Context tại bất kì thời điểm nào. Projection là đối tượng 
+chỉ định mối quan hệ giữa tác tử với môi trường hoặc các tác tử khác. 
+
+\subsection{Context Loading}
+Context Loading là quá trình xây dựng Context gốc với các tác tử, Project và các Context con. Repast S cung 
+cấp một interface \textbf{ContextBuilder} để thực hiện context loading.  \\
+\HRule
+\begin{lstlisting}
+public interface ContextBuilder<T> {
+    Context build(Context<T> context);
+}
+\end{lstlisting}
+\HRule
+
+Mô hình chỉ nên có một \textbf{ContextBuilder}. Tham số vào hàm build là đối tượng context chưa chứa các đối tượng khác. 
+Các lớp implement interface này tạo và thêm vào context các đối tượng cần thiết. 
+Để lớp implement của \textbf{ContextBuilder} được sử dụng thì cần phải thiết lập Data Loader. 
+
+\subsection{Projection}
+Projection là các đối tượng thể hiện mỗi quan hệ giữa các đối tượng trong Context. 
+Mỗi một Projection gắn với một Context và được áp dụng cho tất cả các tác tử trong context đó.  
+Một Context có thể có nhiều Projection.
+Projection có thể là: 
+\begin{itemize}
+    \item Lưới rời rạc đa chiều. 
+    \item Không gian liên tục đa chiều. 
+    \item Đồ thị. 
+    \item Không gian GIS. 
+\end{itemize}
+
+Tác tử có thể tham chiếu đến các Projection thông qua Context mà đang chứa nó và tên của Projection.  \\
+\HRule
+\begin{lstlisting}
+Context context = ContextUtils.getContext (this)
+Projection projection = context.getProjection("mynetwork");
+\end{lstlisting}
+\HRule
+
+Để tạo một Projection trong \textbf{ContextBuilder} thì phải thông qua các bước: 
+\begin{enumerate}
+    \item Tìm Factory tương ứng. 
+    \item Sử dụng Factory để tạo Project. 
+\end{enumerate}
+\HRule
+\begin{lstlisting}
+ContinuousSpaceFactory factory = ContinuousSpaceFactoryFinder
+            .createContinuousSpaceFactory(new HashMap());
+ContinuousSpace space = factory.createContinuousSpace(
+            "simple space", context, ...);
+\end{lstlisting}
+\HRule
+
+\subsubsection{Grid}
+Grid là trụ cột trong mô phỏng đa tác tử. Rất nhiều những mô phỏng xuất hiện sơ khai được xây dựng trên Grid. 
+Về cơ bản grid là một một cấu trúc dữ liệu đa chiều chia không gian thành các cell. Các cell này có thể 
+được tham chiếu tới thông qua tọa độ của chúng. Hay nói cách khác, grid là một ma trận n chiều. 
+Grid được sử dụng phổ biến ngay cả bây giờ. Cấu trúc dữ liệu này rất hiệu quả và có nhiều cách xác định 
+hàng xóm của một cell. 
+
+\noindent Tạo một grid: \\
+\HRule
+\begin{lstlisting}
+GridFactory factory = GridFactoryFinder
+        .createGridFactory(new HashMap());
+Grid grid = factory.createGrid(
+        "My Grid", context, gridBuilderParameters);
+\end{lstlisting}
+\HRule \\
+``My Grid'' là tên của Grid, \textbf{context} là đối tượng kiểu Context, 
+\textbf{gridBuilderParameters} là những tham số thiết lập của Grid. \\
+Ví dụ \textbf{GridBuilderParameters}: \\
+\HRule
+\begin{lstlisting}
+GridBuilderParameters<Object> params = 
+        new GridBuilderParameters<Object> (
+                new InfiniteBorders<Object>(),
+                new SimpleGridAdder<Object>(), true,
+                100, 200);
+\end{lstlisting}
+\HRule \\
+Tham số chỉ định grid có biên vô hạn, cho phép nhiều object trong một cell, kích thước 100x200. 
+
+\subsubsection{Continuous Space}
+Một projection không gian liên tục (giá trị thực) là một không gian mà vị trí của mỗi một tác tử được đại diện 
+bằng các giá trị float đối ngược với giá trị nguyên của Grid. Tuy nhiên nó không hiệu quả để tìm kiếm hàng xóm của 
+một tác tử nào đó.  \\
+Các bước tạo một Continuous Space tương tự như tạo một Grid. 
+
+\noindent Tạo một Network: \\
+\HRule
+\begin{lstlisting}
+NetworkBuilder builder = 
+        new NetworkBuilder("Network", context, true);
+Network network = builder.buildNetwork()
+\end{lstlisting}
+\HRule \\
+Tham số cuối cùng của \textbf{NetworkBuilder} chỉ định đồ thị có hướng hay không. 
+
+\subsubsection{Network}
+Nhiều những mô hình đa tác tử sử dụng mối quan hệ giữa các tác tử thông qua mạng (network) hay đồ thị (graph). 
+Trong Repast thì mạng là một Project có thể được sử dụng dễ dàng như các Project khác. 
 
 \end{document}

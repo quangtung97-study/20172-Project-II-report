@@ -13,7 +13,6 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
-\usepackage{listings}
 
 \usepackage[nottoc,notlof,notlot]{tocbibind} 
 
@@ -55,6 +54,15 @@
 % tab command
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
+\usepackage{listings}
+\lstset{language=Java,
+    commentstyle=\color{green},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily,
+    showstringspaces=false,
+}
+
 \begin{document}
 
 \subfile{sections/title-page.tex}
@@ -78,8 +86,8 @@
 \section{Giới thiệu về thư viện Repast Simphony}
 \subfile{sections/repast.tex}
 
-\newpage
 \section{Mô phỏng giao thông sử dụng thư viện Repast Simphony}
+\subfile{sections/transportation.tex}
 
 \bibliography{report}{}
 \bibliographystyle{plain}
