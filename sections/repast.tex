@@ -110,9 +110,13 @@ Tham số chỉ định grid có biên vô hạn, cho phép nhiều object trong
 
 \subsubsection{Continuous Space}
 Một projection không gian liên tục (giá trị thực) là một không gian mà vị trí của mỗi một tác tử được đại diện 
-bằng các giá trị float đối ngược với giá trị nguyên của Grid. Tuy nhiên nó không hiệu quả để tìm kiếm hàng xóm của 
+bằng các giá trị float, ngược lại so với giá trị nguyên của Grid. Tuy nhiên nó không hiệu quả để tìm kiếm hàng xóm của 
 một tác tử nào đó.  \\
 Các bước tạo một Continuous Space tương tự như tạo một Grid. 
+
+\subsubsection{Network}
+Nhiều những mô hình đa tác tử sử dụng mối quan hệ giữa các tác tử thông qua mạng (network) hay đồ thị (graph). 
+Trong Repast thì mạng là một Project có thể được sử dụng dễ dàng như các Project khác. 
 
 \noindent Tạo một Network: \\
 \HRule
@@ -124,8 +128,5 @@ Network network = builder.buildNetwork()
 \HRule \\
 Tham số cuối cùng của \textbf{NetworkBuilder} chỉ định đồ thị có hướng hay không. 
 
-\subsubsection{Network}
-Nhiều những mô hình đa tác tử sử dụng mối quan hệ giữa các tác tử thông qua mạng (network) hay đồ thị (graph). 
-Trong Repast thì mạng là một Project có thể được sử dụng dễ dàng như các Project khác. 
 
 \end{document}
